@@ -28,7 +28,7 @@ DEBUG = os.getenv("DEBUG", False)
 
 ALLOWED_HOSTS = [os.getenv("ALLOWED_HOSTS", "*"), 'meshack.design']
 
-ALLOWED_ORIGINS = ['http://*', 'https://*']
+ALLOWED_ORIGINS = ['http://meshack.design', 'https://meshack.design']
 CSRF_TRUSTED_ORIGINS = ALLOWED_ORIGINS.copy()
 
 

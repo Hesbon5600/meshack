@@ -15,11 +15,11 @@ sleep 5
 echo "<<<<<<< Database Setup and Migrations Complete >>>>>>>>>>"
 echo " "
 
-echo " "
-echo "<<<<<<<<<<<<<<<<<<<< START Celery >>>>>>>>>>>>>>>>>>>>>>>>"
+# echo " "
+# echo "<<<<<<<<<<<<<<<<<<<< START Celery >>>>>>>>>>>>>>>>>>>>>>>>"
 
-# # start Celery worker
-celery -A app worker -l info --pool=gevent --concurrency=1000 &
+# # # start Celery worker
+# celery -A app worker -l info --pool=gevent --concurrency=1000 &
 
 # # # start celery beat
 # # celery -A celery_conf.celery_periodic_scheduler beat --loglevel=info &

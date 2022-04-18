@@ -26,7 +26,7 @@
                             data-overlay="4">
                             <img class="cover-bg-img"
                                 src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                                data-dsn-src="{% static 'img/about-intro.jpg' %}" alt="">
+                                data-dsn-src="{{profile.header_image_url}}" alt="">
                         </div>
 
                         <div class="d-flex align-items-center h-100 v-dark-head-mobile">
@@ -37,17 +37,12 @@
                                             class="mb-20 sm-title-block background-section pl-15 pr-15 pt-5 pb-5 d-inline-block dsn-load-animate">
                                             Welcome
                                         </h5>
-                                        <h1 class=" title dsn-load-animate" data-dsn-ajax="title">I'M Meshack.
+                                        <h1 class=" title dsn-load-animate" data-dsn-ajax="title">I'M {{profile.name}}.
                                         </h1>
                                         <hr class="mt-40 mb-30 dsn-load-animate">
-                                        <p class="dsn-load-animate">Fusce tempor magna mi, non egestas velit
-                                            ultricies
-                                            nec. Aenean convallis,
-                                            risus non condimentum gravida, odio mauris ullamcorper felis, ut
-                                            venenatis
-                                            purus ex eu mi. Quisque imperdiet lacinia urna, a placerat sapien
-                                            pretium
-                                            eu.</p>
+                                        <p class="dsn-load-animate">
+                                            {{profile.header_message}}
+                                        </p>
 
                                         <a href="#about-me" class="mt-30 dsn-button p-relative dsn-load-animate">
                                             <span class="dsn-border-rdu border-color-theme-color"></span>About
@@ -78,17 +73,7 @@
                                 <div class="col-lg-6">
                                     <div class="part-info">
                                         <h4 class="title-block mb-20">A Little Bit about Myself</h4>
-                                        <p class="mb-15 border-top pt-20">It is a long established fact that a
-                                            reader
-                                            will be distracted by the readable content of a page when looking at
-                                            its
-                                            layout.</p>
-                                        <p class="mb-30 border-bottom pb-20">The point of using Lorem Ipsum is
-                                            that it
-                                            has a more-or-less normal distribution of letters, as opposed to
-                                            using
-                                            'Content here, content here', making it look like readable English.
-                                        </p>
+                                        <p class="mb-15 border-top pt-20">{{profile.about_message}}</p>
 
                                         <a href="#0" class="dsn-button">
                                             <span class="dsn-border border-color-assistant"></span>
@@ -510,7 +495,7 @@
                                     <a class="effect-ajax" data-dsn-ajax="work"
                                         href="{%url 'project' project.slug %}">
                                         <div class="work-item-inner">
-                                            <h5 class="cat p-absolute">{{project.filters}}</h5>
+                                            <h5 class="cat p-absolute">{{project.filters_formatted}}</h5>
 
                                             <div class="line line-top"></div>
                                             <div class="line line-bottom"></div>

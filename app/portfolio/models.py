@@ -1,6 +1,14 @@
 from django_better_admin_arrayfield.models.fields import ArrayField
 from django.db import models
 from django.utils.text import slugify
+from django.db.models import Q
+
+# Create a manager to exclude deleted items
+
+
+class BaseManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(deleted=False)
 
 
 class BaseModel(models.Model):
@@ -15,6 +23,8 @@ class BaseModel(models.Model):
 
     # add deleted option for every entry
     deleted = models.BooleanField(default=False)
+
+    objects = BaseManager()
 
     class Meta:
         abstract = True  # Set this model as Abstract
@@ -105,14 +115,14 @@ class Project(BaseModel):
         """
         Returns a list of small images for this project
         """
-        return list(self.images.filter(is_small=True).values_list('url', flat=True))
+        return list(self.images.filter(~Q(url=self.thumbnail_image_url), is_small=True).values_list('url', flat=True))
 
     @property
     def large_images(self):
         """
         Returns a list of small images for this project
         """
-        return list(self.images.filter(is_small=False).values_list('url', flat=True))
+        return list(self.images.filter(~Q(url=self.thumbnail_image_url), is_small=False).values_list('url', flat=True))
 
     @property
     def filters(self):
@@ -153,6 +163,7 @@ class Project(BaseModel):
     class Meta:
         ordering = ['-created_at']
 
+
 class Socials(BaseModel):
     """
     Socials model
@@ -161,7 +172,7 @@ class Socials(BaseModel):
     short_name = models.CharField(max_length=50, db_index=True)
     url = models.URLField(max_length=500, db_index=True,
                           blank=False, null=False)
-    icon_name= models.CharField(max_length=50, db_index=True)
+    icon_name = models.CharField(max_length=50, db_index=True)
 
     def __str__(self):
         """
@@ -176,13 +187,14 @@ class Socials(BaseModel):
         verbose_name_plural = "Socials"
         ordering = ['-created_at']
 
+
 class Profile(BaseModel):
     """
     Skill model
     """
     name = models.CharField(max_length=50)
     header_image_url = models.URLField(max_length=500,
-                                        db_index=True, blank=True, null=True)
+                                       db_index=True, blank=True, null=True)
     header_message = models.TextField(blank=True, null=True)
     about_message = models.TextField()
 
@@ -193,7 +205,6 @@ class Profile(BaseModel):
         This string is used when a `Profile` is printed in the console.
         """
         return self.name
-
 
 
 class Email(BaseModel):

@@ -18,13 +18,17 @@ class SocialsAdmin(admin.ModelAdmin):
                     'url', 'created_at', 'updated_at')
 
 
-admin.site.register(Profile)
 admin.site.register(Email)
+@admin.register(Profile)
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ('name', 'header_message', 'about_message', 'header_image_url')
+
+
 
 
 @admin.register(Image)
 class ImageAdmin(admin.ModelAdmin):
-    list_display = ('id', 'is_small', 'url', 'created_at', 'updated_at')
+    list_display = ('id', 'is_small', 'url', 'created_at', 'updated_at', 'deleted')
 
 
 @admin.register(Project)

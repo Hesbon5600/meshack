@@ -43,6 +43,7 @@ services:
     stdin_open: true
     tty: true
     networks:
+      - front-end
       - back-end
     environment:
       - DB_USER=${DB_USER}
@@ -68,6 +69,7 @@ services:
     expose:
       - "81"
     networks:
+      - front-end
       - back-end
     depends_on:
       - app

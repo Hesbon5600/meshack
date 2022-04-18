@@ -28,6 +28,8 @@ DEBUG = os.getenv("DEBUG", False)
 
 ALLOWED_HOSTS = [os.getenv("ALLOWED_HOSTS", "*"), 'meshack.design']
 
+CSRF_TRUSTED_ORIGINS = ALLOWED_HOSTS.copy()
+
 
 # Application definition
 

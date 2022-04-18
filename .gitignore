@@ -127,3 +127,21 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# vscode
+.vscode
+
+ # vim temporary files
+.*.swp
+.*.swn
+.*.swo
+ # vim python config
+.ycm_extra_conf.py
+*.DS_Store
+.vscode/settings.json
+*.DS_Store
+.history/
+portfolio-db/
+*.pem
+cloud-sql/
+ELK/

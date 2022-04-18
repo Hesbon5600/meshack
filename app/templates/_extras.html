@@ -1,0 +1,23 @@
+<!-- ========== social network ========== -->
+<div class="social-side social-network d-flex align-items-center ">
+    <div class="icon" data-dsn="parallax">
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+    </div>
+    <ul class="socials d-flex flex-column p-absolute ">
+        {%for social in socials%}
+        <li>
+            <a href="{{social.url}}" target="_blank">
+                <i class="fab {{social.icon_name}}"></i>
+                <span>{{social.short_name}}</span>
+            </a>
+        </li>
+        {%endfor%}
+    </ul>
+</div>
+<!-- ========== End social network ========== -->
+
+<!-- ========== paginate-right-page ========== -->
+<div class="dsn-paginate-right-page"></div>
+
+<!-- ========== Line left & right with creative page ========== -->
+<div class="line-border-style w-100 h-100"></div>

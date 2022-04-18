@@ -1,0 +1,240 @@
+{%load static%}
+{%include '_head.html' with current_page="Contact"%}
+
+<body class="v-light dsn-effect-scroll dsn-cursor-effect dsn-ajax dsn-line-style">
+
+    <!-- ========== Loading Page ========== -->
+    {%include '_loader.html'%}
+    <!-- ========== End Loading Page ========== -->
+
+
+    <!-- ========== Menu ========== -->
+    {%include '_menu.html' with is_contact='active'%}
+    <!-- ========== End Menu ========== -->
+
+
+    <main class="main-root">
+        <div id="dsn-scrollbar">
+            <div class="main-content">
+
+                <!-- ========== Header Normal ========== -->
+
+                <header
+                    class="header-page over-hidden p-relative header-padding-top header-padding-bottom dsn-header-animation">
+                    <div class="bg-circle-dotted"></div>
+                    <div class="dsn-container">
+                        <div
+                            class="content-hero p-relative d-flex align-items-center text-center flex-column h-100 dsn-hero-parallax-title">
+                            <p class="subtitle p-relative line-shap  ">
+                                <span class="pl-10 pr-10 background-section dsn-load-animate">Lat's Tock</span>
+                            </p>
+                            <h1 class="title mt-20 dsn-load-animate">Contact Me</h1>
+                        </div>
+                    </div>
+                </header>
+                <!-- ========== End Header Normal ========== -->
+
+
+                <div class="wrapper">
+
+                    <div class="container root-contact">
+                        <div class="full-width">
+                            <div class="mapouter">
+                                <div class="gmap_canvas p-absolute w-100 h-100"><iframe width="100%" height="500"
+                                        id="gmap_canvas"
+                                        src="https://maps.google.com/maps?q=-1.3195334,36.8109464&t=&z=11&ie=UTF8&iwloc=&output=embed"
+                                        frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a
+                                        href="https://putlocker-is.org"></a><br>
+                                    <style>
+                                        .mapouter {
+                                            position: relative;
+                                            text-align: right;
+                                            height: 500px;
+                                            width: "100%"
+                                        }
+                                    </style>
+                                    <style>
+                                        .gmap_canvas {
+                                            overflow: hidden;
+                                            background: none !important;
+                                            height: 500px;
+                                            width: "100%"
+                                        }
+                                    </style>
+                                </div>
+                            </div>
+                            <!-- <div class="map-custom p-absolute w-100 h-100" data-dsn-lat="30.0489206"
+                                data-dsn-len="31.258553" data-dsn-zoom="14">
+                            </div> -->
+                        </div>
+                        <div class="box-contact-inner section-margin">
+                            <div class="row align-items-center">
+                                <div class="col-lg-7">
+                                    <div class="form-box">
+                                        <div class="line line-top"></div>
+                                        <div class="line line-bottom"></div>
+                                        <div class="line line-left"></div>
+                                        <div class="line line-right"></div>
+
+                                        <div class="mb-30 d-flex text-left flex-column align-items-start">
+                                            <p class="sub-heading line-shap line-shap-before mb-15">
+                                                <span class="line-bg-right">Stay connected</span>
+                                            </p>
+                                            <h2 class="section-title  title-cap">
+                                                Get in Touch
+                                            </h2>
+                                        </div>
+                                        <p class="mb-30">
+                                            It’s all about the humans behind a brand and those experiencing it,
+                                            we’re right there. In the middle.
+                                        </p>
+
+                                        <form id="contact-form" class="form" method="post"
+                                            data-toggle="validator">
+                                            <div class="messages"></div>
+                                            <div class="input__wrap controls">
+                                                <div class="form-group">
+                                                    <div class="entry-box">
+                                                        <label>Your name *</label>
+                                                        <input id="form_name" type="text" name="name"
+                                                            placeholder="Type your name" required="required"
+                                                            data-error="name is required.">
+                                                    </div>
+                                                    <div class="help-block with-errors"></div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="entry-box">
+                                                        <label>Your E-Mail *</label>
+                                                        <input id="form_email" type="email" name="email"
+                                                            placeholder="Type your Email Address" required="required"
+                                                            data-error="Valid email is required.">
+                                                    </div>
+                                                    <div class="help-block with-errors"></div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="entry-box">
+                                                        <label>What's up?</label>
+                                                        <textarea id="form_message" class="form-control" name="message"
+                                                            placeholder="Tell me about you and the world"
+                                                            required="required"
+                                                            data-error="Please,leave me a message."></textarea>
+                                                    </div>
+                                                    <div class="help-block with-errors"></div>
+                                                </div>
+
+                                                <div class="text-right">
+                                                    <div class="image-zoom w-auto d-inline-block" data-dsn="parallax">
+                                                        <button type="submit" class="dsn-button ">
+                                                            <span class="dsn-border border-color-default"></span>
+                                                            <span class="text-button">Send Message</span>
+
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-5">
+                                    <div class="box-info-contact">
+
+                                        <ul>
+                                            <li>
+                                                <h5 class="title-block mb-15">Contact</h5>
+                                                <p class="text-p ">+1 (800) 990 8877</p>
+                                                <div class="over-hidden mt-5">
+                                                    <a class="link-hover" data-hover-text="info@example.com"
+                                                        href="#">info@example.com</a>
+                                                </div>
+
+                                            </li>
+                                            <li>
+                                                <h5 class="title-block mb-15">Address</h5>
+                                                <p class="text-p">United Kingdom <br> 33—35 Southernhay
+                                                    East</p>
+                                            </li>
+                                            <li>
+                                                <h5 class="title-block mb-15">Follow Me</h5>
+                                                <div class="social-item over-hidden">
+                                                    <a class="link-hover" data-hover-text="Instagram." href="#"
+                                                        target="_blank" rel="nofollow">Instagram.</a>
+                                                </div>
+                                                <div class="social-item over-hidden">
+                                                    <a class="link-hover" data-hover-text="Facebook." href="#"
+                                                        target="_blank" rel="nofollow">Facebook.</a>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ==========  next page  ========== -->
+                    <section class="next-page p-relative section-padding border-top background-section">
+                        <div class="bg-circle-dotted"></div>
+                        <div class="bg-circle-dotted bg-circle-dotted-right"></div>
+                        <div class="container">
+                            <div class="c-wapp d-flex justify-content-between">
+                                <div class="d-flex flex-column">
+                                    <p class="sub-heading line-shap line-shap-after ">
+                                        <span class="line-bg-left">
+                                            Don't be weird.
+                                        </span>
+                                    </p>
+                                    <h2 class="section-title max-w750 mt-15">
+                                        Would you like more information or
+                                        do you have a question?
+
+                                    </h2>
+
+
+                                </div>
+
+                                <div class="button-box d-flex justify-content-end align-items-center">
+                                    <div>
+                                        <a href="work.html" class="mt-30 effect-ajax dsn-button p-relative">
+                                            <span class="dsn-border-rdu "></span> My Work
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </section>
+                    <!-- ========== End next page ========== -->
+
+                </div>
+                <!-- =================== Footer Section =================== -->
+                {% include '_footer.html' %}
+                <!-- =================== End Footer Section =================== -->
+            </div>
+        </div>
+
+
+    </main>
+
+
+    <!-- ========== Scroll Right Page To Top Page ========== -->
+    {% include '_scroll-to-top.html' %}
+    <!-- ========== End Scroll Right Page To Top Page ========== -->
+
+
+    <!-- ========== Cursor Page ========== -->
+    {% include '_cursor.html' %}
+    <!-- ========== End Cursor Page ========== -->
+
+    <!-- ========== Style Option Page ========== -->
+    {% include '_style-option.html' %}
+    <!-- ========== End Style Option Page ========== -->
+
+    <!-- ========== Extras ========== -->
+    {% include '_extras.html' %}
+    <!-- ========== End Extras ========== -->
+
+    <!-- Optional JavaScript -->
+    {% include '_scripts.html' %}

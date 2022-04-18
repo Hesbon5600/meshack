@@ -1,0 +1,169 @@
+{%load static%}
+{%include '_head.html' with current_page="Project"%}
+
+<body class="v-light dsn-effect-scroll dsn-cursor-effect dsn-ajax dsn-line-style">
+
+
+    <!-- ========== Loading Page ========== -->
+    {%include '_loader.html'%}
+    <!-- ========== End Loading Page ========== -->
+
+
+    <!-- ========== Menu ========== -->
+    {%include '_menu.html'%}
+    <!-- ========== End Menu ========== -->
+
+    <main class="main-root">
+        <div id="dsn-scrollbar">
+            <div class="main-content">
+                <div class="content-inner">
+                    <!--=== Header Project Full With & content bottom ===-->
+                    <header class="header-project p-relative h-100-v over-hidden dsn-header-animation v-dark-head">
+                        <div data-dsn-ajax="img" class="p-absolute dsn-hero-parallax-img w-100 h-100 over-hidden  "
+                            data-overlay="6">
+                            <img class="cover-bg-img" src="{{project.thumbnail_image_url}}" alt="">
+                        </div>
+                        <div class="project-number p-absolute dsn-container d-flex">
+                            <h6>Project</h6>
+                            <span class="curent">{{project.project_index|last}}</span>
+                            <span class="full">{{project.project_index|first}}</span>
+                        </div>
+                        <div class="d-flex  dsn-hero-parallax-title align-items-end h-100 dsn-container pb-40 pt-80">
+                            <div class="content p-relative w-100 padding-lr-section">
+                                <div class="intro-project">
+                                    <div id="dsn-hero-title" class="intro-title">
+                                        <div class="metas d-inline-block mb-20">
+                                            {%for filter_ in project.proj_filters%}
+                                            <span>{{filter_}}</span>
+                                            {%endfor%}
+                                        </div>
+                                        <h1 class="title" data-dsn-ajax="title">
+                                            {{project.name}}
+                                        </h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+                    <!--=== End Header Project Full With & content bottom ===-->
+                    <div class="wrapper">
+                        <!--=== Intro Project ===-->
+                        <div class="intro-project p-relative section-margin">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="intro-project-left">
+                                            <h4 class="title-block text-uppercase mb-20">Project</h4>
+                                            <ul class="intro-project-list">
+                                                {%if project.client%}
+                                                <li class="p-relative">
+                                                    <strong>Client</strong> {{project.client}}
+                                                </li>
+                                                {%endif%}
+                                                {%if project.completion_date%}
+                                                <li class="p-relative">
+                                                    <strong> Published</strong> {{project.completion_date}}
+                                                </li>
+                                                {%endif%}
+                                                {%if project.ongoing%}
+                                                <li class="p-relative">
+                                                    <strong> Status</strong> Ongoing
+                                                </li>
+                                                {%endif%}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-7 offset-lg-1">
+                                        <div class="intro-project-right">
+                                            <h4 class="title-block text-uppercase mb-20">info</h4>
+                                            <p class="intro-project-description">{{project.description}}</p>
+                                            {%if project.tags%}
+                                            <div class="intro-project-cat mt-30">
+                                                {%for tag_ in project.tags%}
+                                                <span class="cat-item">{{tag_}}</span>
+                                                {%endfor%}
+                                            </div>
+                                            {%endif%}
+                                            {%if project.url%}
+                                            <a target="_blank" href="{{project.url}}"
+                                                class="visit-site mt-30">
+                                                <span class="inner-visit d-flex align-items-center">
+                                                    <span class="text text-uppercase">Visit Website</span>
+                                                    <span class="icon">
+                                                        <svg viewBox="0 0 40 40">
+                                                            <polyline class="path"
+                                                                points="14.6 17.45 20 22.85 25.4 17.45"></polyline>
+                                                        </svg>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                            {%endif%}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--=== End Intro Project ===-->
+
+                        {%for url_ in project.large_images %}
+                        <div class="section-margin p-relative">
+                            <div class="img-box-parallax" data-dsn-grid="move-up">
+                                <img class="has-bigger-scale"
+                                    src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                                    data-dsn-src="{{url_}}" alt="">
+                            </div>
+                        </div>
+                        {%endfor%}
+
+                        {% if project.small_images %}
+                        <div class="section-margin has-popup over-hidden p-relative">
+                            <div class="container">
+                                <div class="d-grid grid-md-3  over-hidden">
+                                    {%for url_ in project.small_images %}
+                                    <a href="{{url_}}"
+                                        class="p-relative over-hidden h-v-60 d-flex">
+                                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                                            data-dsn-src="{{url_}}"
+                                            alt="" class="cover-bg-img">
+                                    </a>
+                                    {%endfor%}
+                                </div>
+                            </div>
+                        </div>
+                        {%endif%}
+
+                    </div>
+                    <!-- ==========  next page  ========== -->
+                    {% include '_contact-me.html' %}
+                    <!-- ========== End next page ========== -->
+                </div>
+                <!-- =================== Footer Section =================== -->
+                {% include '_footer.html' %}
+                <!-- =================== End Footer Section =================== -->
+            </div>
+        </div>
+
+        <!-- ========== Contact Form Model ========== -->
+        {%include '_contact-modal.html'%}
+        <!-- ========== End Contact Form Model ========== -->
+    </main>
+
+    <!-- ========== Scroll Right Page To Top Page ========== -->
+    {% include '_scroll-to-top.html' %}
+    <!-- ========== End Scroll Right Page To Top Page ========== -->
+
+
+    <!-- ========== Cursor Page ========== -->
+    {% include '_cursor.html' %}
+    <!-- ========== End Cursor Page ========== -->
+
+    <!-- ========== Style Option Page ========== -->
+    {% include '_style-option.html' %}
+    <!-- ========== End Style Option Page ========== -->
+
+    <!-- ========== Extras ========== -->
+    {% include '_extras.html' %}
+    <!-- ========== End Extras ========== -->
+
+    <!-- Optional JavaScript -->
+    {% include '_scripts.html' %}

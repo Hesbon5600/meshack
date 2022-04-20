@@ -85,8 +85,7 @@
                                             </div>
                                             {%endif%}
                                             {%if project.url%}
-                                            <a target="_blank" href="{{project.url}}"
-                                                class="visit-site mt-30">
+                                            <a target="_blank" href="{{project.url}}" class="visit-site mt-30">
                                                 <span class="inner-visit d-flex align-items-center">
                                                     <span class="text text-uppercase">Visit Website</span>
                                                     <span class="icon">
@@ -120,12 +119,17 @@
                             <div class="container">
                                 <div class="d-grid grid-md-3  over-hidden">
                                     {%for url_ in project.small_images %}
-                                    <a href="{{url_}}"
-                                        class="p-relative over-hidden h-v-60 d-flex">
-                                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                                            data-dsn-src="{{url_}}"
-                                            alt="" class="cover-bg-img">
-                                    </a>
+
+                                    <div class="our-blog our-blog-classic our-blog-full-img">
+                                        <div class="blog-item p-relative d-flex align-items-center h-100 w-100">
+                                            <div class="box-content p-relative">
+                                                <a href="{{url_}}" class="p-1 over-hidden h-v-60 d-flex">
+                                                    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                                                        data-dsn-src="{{url_}}" alt="" class="cover-bg-img">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
                                     {%endfor%}
                                 </div>
                             </div>

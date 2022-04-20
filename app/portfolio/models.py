@@ -52,6 +52,8 @@ class Category(BaseModel):
         verbose_name = "Category"
         verbose_name_plural = "Categories"
         ordering = ['-created_at']
+
+
 class Service(BaseModel):
     """
     Service model
@@ -70,6 +72,7 @@ class Service(BaseModel):
         """
         return self.name
 
+
 class Image(BaseModel):
     """
     Image model
@@ -84,7 +87,24 @@ class Image(BaseModel):
 
         This string is used when a `Image` is printed in the console.
         """
-        return f"<Image - {self.url}>"
+        return f"{self.url}"
+
+
+class ExtraImage(BaseModel):
+    """
+    ExtraImage model
+    """
+    name = models.CharField(max_length=50, blank=True, null=True)
+    url = models.URLField(max_length=500, db_index=True,
+                          blank=False, null=False)
+
+    def __str__(self):
+        """
+        Returns a string representation of this `ExtraImage`.
+
+        This string is used when a `ExtraImage` is printed in the console.
+        """
+        return f"{self.name}"
 
 
 class Project(BaseModel):

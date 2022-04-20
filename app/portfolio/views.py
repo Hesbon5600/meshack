@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 from django.views.generic import TemplateView
 
-from app.portfolio.models import Category, Profile, Project, Service, Socials
+from app.portfolio.models import Category, ExtraImage, Profile, Project, Service, Socials
 
 
 class HomeView(TemplateView):
@@ -14,7 +14,11 @@ class HomeView(TemplateView):
         socials = Socials.objects.all()
         profile = Profile.objects.first()
         services = Service.objects.all()
-        return render(request, self.template_name, context={"projects": projects, "categories": categories, 'socials': socials, 'profile': profile, 'services': services})
+        extra_images = ExtraImage.objects.all()
+        return render(request, self.template_name,
+                      context={"projects": projects, "categories": categories,
+                               'socials': socials, 'profile': profile,
+                               'services': services, 'extra_images': extra_images})
 
 
 class ProjectView(TemplateView):

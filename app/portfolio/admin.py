@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Image, Project, Category, Project, Email, Service, Socials, Profile
+from .models import ExtraImage, Image, Project, Category, Project, Email, Service, Socials, Profile
 from django_better_admin_arrayfield.admin.mixins import DynamicArrayMixin
 from django_better_admin_arrayfield.forms.widgets import DynamicArrayTextareaWidget
 from django_better_admin_arrayfield.forms.fields import DynamicArrayField
@@ -32,6 +32,9 @@ class ProfileAdmin(admin.ModelAdmin):
 @admin.register(Image)
 class ImageAdmin(admin.ModelAdmin):
     list_display = ('id', 'is_small', 'url', 'created_at', 'updated_at', 'deleted')
+@admin.register(ExtraImage)
+class ImageAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'url', 'created_at', 'updated_at', 'deleted')
 
 
 @admin.register(Project)

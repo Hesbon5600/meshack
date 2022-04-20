@@ -103,41 +103,14 @@
                                     <div class="wrapper-client">
                                         <div class="swiper-container w-100">
                                             <div class="swiper-wrapper">
+                                                {% for image in extra_images %}
                                                 <div class="swiper-slide logo-box dsn-up border-top">
                                                     <div class="logo-box-inner">
                                                         <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                                                            data-dsn-src="{% static 'img/logo/1.png' %}" alt="">
+                                                            data-dsn-src="{{image.url}}" alt="">
                                                     </div>
                                                 </div>
-
-                                                <div class="swiper-slide logo-box dsn-up border-top">
-                                                    <div class="logo-box-inner">
-                                                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                                                            data-dsn-src="{% static 'img/logo/2.png' %}" alt="">
-                                                    </div>
-                                                </div>
-
-                                                <div class="swiper-slide logo-box dsn-up border-top">
-                                                    <div class="logo-box-inner">
-                                                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                                                            data-dsn-src="{% static 'img/logo/3.png' %}" alt="">
-                                                    </div>
-                                                </div>
-
-                                                <div class="swiper-slide logo-box dsn-up border-top">
-                                                    <div class="logo-box-inner">
-                                                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                                                            data-dsn-src="{% static 'img/logo/4.png' %}" alt="">
-                                                    </div>
-                                                </div>
-
-                                                <div class="swiper-slide logo-box dsn-up border-top">
-                                                    <div class="logo-box-inner">
-                                                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                                                            data-dsn-src="{% static 'img/logo/1.png' %}" alt="">
-                                                    </div>
-                                                </div>
-
+                                                {% endfor %}
                                             </div>
                                         </div>
                                     </div>

@@ -8,7 +8,7 @@ from django.db.models import Q
 
 class BaseManager(models.Manager):
     def get_queryset(self):
-        return super().get_queryset().filter(deleted=False)
+        return super().get_queryset().filter(deleted=False).order_by('-created_at')
 
 
 class BaseModel(models.Model):
@@ -52,7 +52,23 @@ class Category(BaseModel):
         verbose_name = "Category"
         verbose_name_plural = "Categories"
         ordering = ['-created_at']
+class Service(BaseModel):
+    """
+    Service model
+    """
+    name = models.CharField(max_length=50, db_index=True,
+                            blank=False, null=False)
+    description = models.TextField(blank=False, null=False)
 
+    icon = models.CharField(max_length=50, blank=True, null=True)
+
+    def __str__(self):
+        """
+        Returns a string representation of this `Service`.
+
+        This string is used when a `Service` is printed in the console.
+        """
+        return self.name
 
 class Image(BaseModel):
     """

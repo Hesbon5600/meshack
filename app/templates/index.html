@@ -193,6 +193,67 @@
                     </div>
                     <!-- ========== End facts Section ========== -->
 
+                    <!-- ========== Work Section ========== -->
+                    <section class="work section-margin dsn-col dsn-col-space  dsn-filter not-filter"
+                        data-dsn-title="My Work">
+                        <div class="container d-flex text-center flex-column align-items-center mb-70">
+                            <p class="sub-heading mb-15">
+                                <span class="icon">{</span>
+                                <span class="text"> My Works</span>
+                                <span class="icon">}</span>
+                            </p>
+                            <h2 class="section-title">Creative Portfolio Designs</h2>
+                        </div>
+
+                        <div class="container">
+                            <div class="filtering-t mb-50 ">
+                                <div
+                                    class="filtering-wrap d-flex align-items-center text-center justify-content-center">
+                                    <div class="filtering">
+                                        <button type="button" data-filter="*" class="active">
+                                            All
+                                        </button>
+                                        {% for category in categories %}
+                                        <button type="button"
+                                            data-filter=".{{category.filter}}">{{category.name}}</button>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div
+                                class="work-inner projects-list work-one-page d-grid grid-md-2  grid-lg-2 p-relative w-100 dsn-item-filter dsn-isotope">
+
+                                {% for project in projects %}
+                                <div class="work-item  p-relative {{project.filters}}">
+                                    <a class="effect-ajax" data-dsn-ajax="work" href="{%url 'project' project.slug %}">
+                                        <div class="work-item-inner">
+                                            <h5 class="cat p-absolute">{{project.filters_formatted}}</h5>
+
+                                            <div class="line line-top"></div>
+                                            <div class="line line-bottom"></div>
+                                            <div class="line line-left"></div>
+                                            <div class="line line-right"></div>
+
+                                            <div class="box-img before-z-index" data-overlay="6">
+                                                <img class="cover-bg-img has-top-bottom"
+                                                    src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                                                    data-dsn-src="{{project.thumbnail_image_url}}" alt="">
+                                            </div>
+                                        </div>
+
+                                        <div class="box-content">
+                                            <h4 class="title-block sec-title">{{project.name}}</h4>
+                                        </div>
+                                    </a>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </section>
+                    <!-- ========== End Work Section ========== -->
+
+
                     <!-- ========== Service Section ========== -->
                     <section class="services with-line with-number p-relative section-margin dsn-col"
                         data-dsn-title="My Services" data-dsn-animate="section">
@@ -459,66 +520,6 @@
                         </div>
                     </section>
                     <!-- ========== End Service Section ========== -->
-
-                    <!-- ========== Work Section ========== -->
-                    <section class="work section-margin dsn-col dsn-col-space  dsn-filter not-filter"
-                        data-dsn-title="My Work">
-                        <div class="container d-flex text-center flex-column align-items-center mb-70">
-                            <p class="sub-heading mb-15">
-                                <span class="icon">{</span>
-                                <span class="text"> My Works</span>
-                                <span class="icon">}</span>
-                            </p>
-                            <h2 class="section-title">Creative Portfolio Designs</h2>
-                        </div>
-
-                        <div class="container">
-                            <div class="filtering-t mb-50 ">
-                                <div
-                                    class="filtering-wrap d-flex align-items-center text-center justify-content-center">
-                                    <div class="filtering">
-                                        <button type="button" data-filter="*" class="active">
-                                            All
-                                        </button>
-                                        {% for category in categories %}
-                                        <button type="button" data-filter=".{{category.filter}}">{{category.name}}</button>
-                                        {% endfor %}
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div
-                                class="work-inner projects-list work-one-page d-grid grid-md-2  grid-lg-2 p-relative w-100 dsn-item-filter dsn-isotope">
-
-                                {% for project in projects %}
-                                <div class="work-item  p-relative {{project.filters}}">
-                                    <a class="effect-ajax" data-dsn-ajax="work"
-                                        href="{%url 'project' project.slug %}">
-                                        <div class="work-item-inner">
-                                            <h5 class="cat p-absolute">{{project.filters_formatted}}</h5>
-
-                                            <div class="line line-top"></div>
-                                            <div class="line line-bottom"></div>
-                                            <div class="line line-left"></div>
-                                            <div class="line line-right"></div>
-
-                                            <div class="box-img before-z-index" data-overlay="6">
-                                                <img class="cover-bg-img has-top-bottom"
-                                                    src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                                                    data-dsn-src="{{project.thumbnail_image_url}}" alt="">
-                                            </div>
-                                        </div>
-
-                                        <div class="box-content">
-                                            <h4 class="title-block sec-title">{{project.name}}</h4>
-                                        </div>
-                                    </a>
-                                </div>
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </section>
-                    <!-- ========== End Work Section ========== -->
 
                     <!-- ==========  next page  ========== -->
                     {% include '_contact-me.html' %}

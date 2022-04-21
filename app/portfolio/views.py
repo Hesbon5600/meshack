@@ -2,7 +2,14 @@ from django.shortcuts import render
 
 from django.views.generic import TemplateView
 
-from app.portfolio.models import Category, ExtraImage, Profile, Project, Service, Socials
+from app.portfolio.models import (
+    Category,
+    ExtraImage,
+    Profile,
+    Project,
+    Service,
+    Socials,
+)
 
 
 class HomeView(TemplateView):
@@ -15,10 +22,18 @@ class HomeView(TemplateView):
         profile = Profile.objects.first()
         services = Service.objects.all()
         extra_images = ExtraImage.objects.all()
-        return render(request, self.template_name,
-                      context={"projects": projects, "categories": categories,
-                               'socials': socials, 'profile': profile,
-                               'services': services, 'extra_images': extra_images})
+        return render(
+            request,
+            self.template_name,
+            context={
+                "projects": projects,
+                "categories": categories,
+                "socials": socials,
+                "profile": profile,
+                "services": services,
+                "extra_images": extra_images,
+            },
+        )
 
 
 class ProjectView(TemplateView):
@@ -27,7 +42,11 @@ class ProjectView(TemplateView):
     def get(self, request, project_name):
         socials = Socials.objects.all()
         project = Project.objects.get(slug__iexact=project_name)
-        return render(request, self.template_name, context={"project": project, 'socials': socials})
+        return render(
+            request,
+            self.template_name,
+            context={"project": project, "socials": socials},
+        )
 
 
 class ContactView(TemplateView):
@@ -43,4 +62,12 @@ class AboutView(TemplateView):
 
     def get(self, request):
         socials = Socials.objects.all()
-        return render(request, self.template_name, context={"socials": socials})
+        profile = Profile.objects.first()
+        categories = Category.objects.all()
+        services = Service.objects.all()
+
+        return render(
+            request,
+            self.template_name,
+            context={"socials": socials, "profile": profile, "categories": categories, "services": services},
+        )

@@ -27,6 +27,10 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
+# install Poetry
+RUN curl -sSL https://install.python-poetry.org | python3 -
+ENV PATH /root/.local/bin:$PATH
+
 # Upgrade pip
 RUN pip install --upgrade pip
 
@@ -34,10 +38,8 @@ RUN pip install --upgrade pip
 COPY ./poetry.lock $MICRO_SERVICE
 COPY ./pyproject.toml $MICRO_SERVICE
 
-# install dependencies
-RUN curl -sSL https://install.python-poetry.org | python3 -
-ENV PATH /root/.local/bin:$PATH
 
+# install dependencies
 RUN poetry config virtualenvs.create false
 
 RUN poetry install --no-dev

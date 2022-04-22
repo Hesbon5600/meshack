@@ -69,7 +69,9 @@ class ContactView(TemplateView):
         mail = Email(**email_data)
         mail.save()
         send_mail_.delay(
-            f"Message from portfolio! - {mail.name}", mail.message, mail.email
+            f"Message from portfolio! -  {mail.name} - {mail.email} |",
+            mail.message,
+            mail.email,
         )
 
         return JsonResponse(

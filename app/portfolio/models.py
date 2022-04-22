@@ -251,8 +251,6 @@ class Email(BaseModel):
                             blank=False, null=False)
     email = models.CharField(max_length=50, db_index=True,
                              blank=True, null=True)
-    subject = models.TextField(
-        max_length=50, blank=True, null=True)
     message = models.TextField(
         max_length=5000, blank=True, null=True)
 

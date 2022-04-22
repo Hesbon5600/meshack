@@ -7,7 +7,6 @@ authors = ["Hesbon5600 <hesbonkiptoo5600@gmail.com>"]
 [tool.poetry.dependencies]
 python = "^3.10"
 Django = "^4.0.3"
-whitenoise = "^6.0.0"
 django-feather = "^0.3.0"
 gunicorn = "^20.1.0"
 django-tinymce = "^3.4.0"

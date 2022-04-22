@@ -1,9 +1,12 @@
 from django.shortcuts import render
 
 from django.views.generic import TemplateView
+from django.http import JsonResponse
+from app.portfolio.helpers.tasks import send_mail_
 
 from app.portfolio.models import (
     Category,
+    Email,
     ExtraImage,
     Profile,
     Project,
@@ -56,6 +59,23 @@ class ContactView(TemplateView):
         socials = Socials.objects.all()
         return render(request, self.template_name, context={"socials": socials})
 
+    def post(self, request):
+        data = request.POST
+        email_data = {
+            "name": data["name"],
+            "email": data["email"],
+            "message": data["message"],
+        }
+        mail = Email(**email_data)
+        mail.save()
+        send_mail_.delay(
+            f"Message from portfolio! - {mail.name}", mail.message, mail.email
+        )
+
+        return JsonResponse(
+            {"message": "Email sent successfully. I will be in contact ASAP"}
+        )
+
 
 class AboutView(TemplateView):
     template_name = "about.html"
@@ -69,5 +89,10 @@ class AboutView(TemplateView):
         return render(
             request,
             self.template_name,
-            context={"socials": socials, "profile": profile, "categories": categories, "services": services},
+            context={
+                "socials": socials,
+                "profile": profile,
+                "categories": categories,
+                "services": services,
+            },
         )

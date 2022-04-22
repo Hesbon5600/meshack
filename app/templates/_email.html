@@ -1,0 +1,30 @@
+<script>
+    $("#contact-form").on('submit', function (event) {
+        event.preventDefault();
+        let data = {}
+        data.name = $("#form_name").val();
+        data.email = $("#form_email").val();
+        data.message = $("#form_message").val();
+
+        if (data.name && data.email && data.message) {
+
+            $.ajax({
+                url: "{%url 'contact'%}",
+                traditional: true,
+                data: data,
+                headers: {
+                    'X-CSRFTOKEN': '{{ csrf_token }}'
+                },
+                dataType: 'json',
+                type: 'POST',
+                success: function (data) {
+                    $("#form_name").val("");
+                    $("#form_email").val("");
+                    $("#form_message").val("");
+                    $("#form_success").html(`<span id="form_success" style="color: rgb(24, 119, 5)">${data.message}</span>`)
+                }
+            });
+        }
+
+    });
+</script>

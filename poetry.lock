@@ -264,14 +264,6 @@ django = ">=2.0"
 testing = ["pytest", "pytest-django"]
 
 [[package]]
-name = "django-tinymce"
-version = "3.4.0"
-description = "A Django application that contains a widget to render a form field as a TinyMCE editor."
-category = "main"
-optional = false
-python-versions = "*"
-
-[[package]]
 name = "gevent"
 version = "21.12.0"
 description = "Coroutine-based network library"
@@ -596,7 +588,7 @@ testing = ["coverage (>=5.0.3)", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "a9ab25529fe47d48b7d0270d05978832b7b519b6ad166adf6eba0e5135a4ae53"
+content-hash = "dc6ea18cdcc81adec5c21cdb0bd9f0d859284e330de20ea6fa38d1851aee8b9f"
 
 [metadata.files]
 amqp = [
@@ -743,10 +735,6 @@ django-better-admin-arrayfield = [
 django-feather = [
     {file = "django-feather-0.3.0.tar.gz", hash = "sha256:ed60fbaed605ee6912a36a7be442d7150e2d48cc46bb40a8d9fc2da162b9c676"},
     {file = "django_feather-0.3.0-py3-none-any.whl", hash = "sha256:cc3dcd9f42fa449d947130b31c154df14275edfd2e48909f5ea7f0ec7634badd"},
-]
-django-tinymce = [
-    {file = "django-tinymce-3.4.0.tar.gz", hash = "sha256:275653dbf09fbd3347928757d6baf29040b42fe5c5d95396418c36aa4b1517eb"},
-    {file = "django_tinymce-3.4.0-py3-none-any.whl", hash = "sha256:4241eb201c670892aa8980a130652f4ae818ba24702f078336296d25e9e1658b"},
 ]
 gevent = [
     {file = "gevent-21.12.0-cp27-cp27m-macosx_10_14_x86_64.whl", hash = "sha256:2afa3f3ad528155433f6ac8bd64fa5cc303855b97004416ec719a6b1ca179481"},

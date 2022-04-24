@@ -75,50 +75,34 @@
                 <div class="nav__info">
                     <div class="nav-content">
                         <p class="title-line">
-                            Studio</p>
+                            Location</p>
                         <p>
-                            26-30 New Damietta<br>
-                            El-Mahalla El-Kubra, SK1 66LM</p>
+                            Nairobi,<br>
+                            Kenya</p>
                     </div>
                     <div class="nav-content">
                         <p class="title-line">
                             Contact</p>
                         <p class="links over-hidden">
-                            <a href="#" data-hover-text="+00 (2)012 3321" class="link-hover">+00 (2)012
-                                3321</a>
+                            <a href="tell:+254720030567" data-hover-text="+254 720 030 567" class="link-hover">+254 720 030 567</a>
                         </p>
                         <p class="links  over-hidden">
-                            <a href="#" data-hover-text="info@dsngrid.com" class="link-hover">info@dsngrid.com</a>
+                            <a href="mailto:meshackmaiyo8@gmail.com" data-hover-text="meshackmaiyo8@gmail.com" class="link-hover" target="_blank" >meshackmaiyo8@gmail.com</a>
                         </p>
                     </div>
                 </div>
                 <div class="nav-social nav-content">
                     <div class="nav-social-inner p-relative">
                         <p class="title-line">
-                            Follow me</p>
+                            Check Me Out</p>
                         <ul>
-                            <li>
-                                <a href="#" target="_blank" rel="nofollow">Dribbble.
+                        {%for social in socials%}
+                        <li>
+                                <a href="{{social.url}}" target="_blank" rel="nofollow">{{social.full_name}}.
                                     <div class="icon-circle"></div>
                                 </a>
                             </li>
-                            <li>
-                                <a href="#" target="_blank" rel="nofollow">Behance.
-                                    <div class="icon-circle"></div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" target="_blank" rel="nofollow">Linkedin.
-                                    <div class="icon-circle">
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" target="_blank" rel="nofollow">Twitter.
-                                    <div class="icon-circle"></div>
-                                </a>
-                            </li>
-
+                            {%endfor%}
                         </ul>
                     </div>
                 </div>

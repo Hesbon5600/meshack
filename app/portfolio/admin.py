@@ -21,7 +21,7 @@ class SocialsAdmin(admin.ModelAdmin):
 admin.site.register(Email)
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('name', 'header_message', 'about_message', 'header_image_url')
+    list_display = ('name', 'header_message', 'about_message', 'header_image_url', 'resume_link', 'created_at', 'updated_at')
 @admin.register(Service)
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ('name', 'description', 'icon',)

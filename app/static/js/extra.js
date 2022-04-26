@@ -35,3 +35,18 @@ window.onload = get_theme = () => {
 
     body.className = new_class;
 }
+
+downloadResume = (url) => {
+    if (url) {
+        fetch(url).then(function (t) {
+            return t.blob().then((b) => {
+                var a = document.createElement("a");
+                a.href = URL.createObjectURL(b);
+                a.setAttribute("download", "Meshack-Maiyo-Resume.pdf");
+                a.click();
+            }
+            );
+        });
+    }
+}
+

@@ -5,6 +5,7 @@ from django.http import JsonResponse
 from app.portfolio.helpers.tasks import send_mail_
 
 from app.portfolio.models import (
+    AboutImages,
     Category,
     Email,
     ExtraImage,
@@ -87,6 +88,7 @@ class AboutView(TemplateView):
         profile = Profile.objects.first()
         categories = Category.objects.all()
         services = Service.objects.all()
+        about_images = AboutImages.objects.first()
 
         return render(
             request,
@@ -96,5 +98,6 @@ class AboutView(TemplateView):
                 "profile": profile,
                 "categories": categories,
                 "services": services,
+                "about_images": about_images,
             },
         )

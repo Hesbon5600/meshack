@@ -279,3 +279,21 @@ class Email(BaseModel):
         This string is used when a `Email` is printed in the console.
         """
         return f"<Email - {self.name}>"
+
+
+class AboutImages(BaseModel):
+    """
+    AboutImages model
+    """
+
+    left_image_url = models.URLField(max_length=500)
+    right_image_url = models.URLField(max_length=500)
+    bottom_image_url = models.URLField(max_length=500)
+
+    def __str__(self):
+        """
+        Returns a string representation of this `AboutImages`.
+
+        This string is used when a `AboutImages` is printed in the console.
+        """
+        return self.left_image_url

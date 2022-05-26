@@ -93,19 +93,13 @@
                     <div class="section-margin has-popup over-hidden p-relative">
                         <div class="container">
                             <div class="d-grid grid-md-2  over-hidden">
-                                <a href="https://res.cloudinary.com/dsw3onksq/image/upload/v1650629608/Mesha/Main_Dashboard_ixc9jx.webp"
-                                    class="p-relative over-hidden d-flex h-v-60">
+                                <a href="{{about_images.left_image_url}}" class="p-relative over-hidden d-flex h-v-60">
                                     <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                                        data-dsn-src="https://res.cloudinary.com/dsw3onksq/image/upload/v1650629608/Mesha/Main_Dashboard_ixc9jx.webp"
-                                        data-dsn-srcset="{% static 'img/help-project.jpg 1800w' %} {% static 'img/help-project-sm.jpg 768w' %}"
-                                        alt="" class="cover-bg-img">
+                                        data-dsn-src="{{about_images.left_image_url}}" alt="" class="cover-bg-img">
                                 </a>
-                                <a href="https://res.cloudinary.com/dsw3onksq/image/upload/v1650629606/Mesha/Profile_Screen_vunrnu.webp"
-                                    class="p-relative over-hidden d-flex h-v-60">
+                                <a href="{{about_images.right_image_url}}" class="p-relative over-hidden d-flex h-v-60">
                                     <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                                        data-dsn-src="https://res.cloudinary.com/dsw3onksq/image/upload/v1650629606/Mesha/Profile_Screen_vunrnu.webp"
-                                        data-dsn-srcset="{% static 'img/plan-project.jpg 1800w' %} {% static 'img/help-project-sm.jpg 768w' %}"
-                                        alt="" class="cover-bg-img">
+                                        data-dsn-src="{{about_images.right_image_url}}" alt="" class="cover-bg-img">
                                 </a>
                             </div>
                         </div>
@@ -188,7 +182,7 @@
                                 <div class="col-lg-6 mt-sm">
                                     <div class="box-right">
                                         <div class="container-img">
-                                            <img class="cover-bg-img" src="{% static 'img/agency-1.jpg' %}" alt="">
+                                            <img class="cover-bg-img" src="{{about_images.bottom_image_url}}" alt="">
                                         </div>
                                     </div>
                                 </div>

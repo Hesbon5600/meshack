@@ -70,10 +70,10 @@ services:
     build:
       context: .
       dockerfile: nginx/nginx.Dockerfile
-    ports:
-      - "80:81"
-    # expose:
-    #   - "81"
+    # ports:
+    #   - "80:81"
+    expose:
+      - "81"
     networks:
       - back-end
     depends_on:
@@ -87,35 +87,34 @@ services:
       - VIRTUAL_HOST=meshack.design
       - LETSENCRYPT_HOST=meshack.design
       - VIRTUAL_PORT=81
-  # nginx-proxy:
-  #   image: nginxproxy/nginx-proxy
-  #   container_name: nginx-proxy
-  #   ports:
-  #     - "80:80"
-  #     - "443:443"
-  #   volumes:
-  #     - /var/run/docker.sock:/tmp/docker.sock:ro
-  #     - ./nginx/nginx.conf:/data/nginx/custom/http_top.conf
-  #     - certs:/etc/nginx/certs
-  #     - vhost-d:/etc/nginx/vhost.d
-  #     - html:/usr/share/nginx/html
-  #   environment:
-  #     - DEFAULT_EMAIL=hesbonkiptoo5600@gmail.com
-  #   networks:
-  #     - back-end
-  # acme-companion:
-  #   image: nginxproxy/acme-companion
-  #   container_name: nginx-proxy-acme
-  #   volumes:
-  #     - /var/run/docker.sock:/var/run/docker.sock:ro
-  #     - certs:/etc/nginx/certs
-  #     - vhost-d:/etc/nginx/vhost.d
-  #     - html:/usr/share/nginx/html
-  #     - acme:/etc/acme.sh
-  #   environment:
-  #     - DEFAULT_EMAIL=hesbonkiptoo5600@gmail.com
-  #     - NGINX_PROXY_CONTAINER=nginx-proxy
-
+  nginx-proxy:
+    image: nginxproxy/nginx-proxy
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./nginx/nginx.conf:/data/nginx/custom/http_top.conf
+      - certs:/etc/nginx/certs
+      - vhost-d:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+    environment:
+      - DEFAULT_EMAIL=hesbonkiptoo5600@gmail.com
+    networks:
+      - back-end
+  acme-companion:
+    image: nginxproxy/acme-companion
+    container_name: nginx-proxy-acme
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - certs:/etc/nginx/certs
+      - vhost-d:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - acme:/etc/acme.sh
+    environment:
+      - DEFAULT_EMAIL=hesbonkiptoo5600@gmail.com
+      - NGINX_PROXY_CONTAINER=nginx-proxy
 
 networks:
   back-end:

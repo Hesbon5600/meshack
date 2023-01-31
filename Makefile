@@ -3,6 +3,7 @@ help:
 	@echo "----------------------->>>>>>>>>>>>><<<<<<<<<<<<<<--------------------------"
 	@echo "-                     Available Docker commands                            -"
 	@echo "----------------------------------------------------------------------------"
+	@echo "---> make build         - To build the app containers"
 	@echo "---> make start         - To start the containers in the background"
 	@echo "---> make start-verbose - To start the containers verbosely"
 	@echo "---> make stop          - To stop the app containers"
@@ -11,6 +12,12 @@ help:
 	@echo "----------------------------------------------------------------------------"
 
 
+
+#@-- command to build the application --@#
+build:
+	@echo "<<<<<<<<<<Build the app containers>>>>>>>>>>>>>>"
+	@echo ""
+	docker-compose build
 
 #@-- command to start the container in the background --@#
 start:

@@ -1,4 +1,4 @@
-FROM python:3.10-slim
+FROM python:3.10-alpine
 
 ENV MICRO_SERVICE=/portfolio-app
 # set work directory
@@ -10,8 +10,8 @@ RUN mkdir -p $MICRO_SERVICE
 WORKDIR $MICRO_SERVICE
 
 # set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
 # The default user that should be used
 ARG USER_ID=1000
@@ -19,30 +19,39 @@ ARG GROUP_ID=1000
 ARG APP_USER=appuser
 
 # Create user and group
-RUN groupadd -g ${GROUP_ID} ${APP_USER} && useradd -u ${USER_ID} -g ${APP_USER} -s /bin/sh ${APP_USER}
+RUN addgroup -g ${GROUP_ID} ${APP_USER} && adduser -D -u ${USER_ID} -G ${APP_USER} -s /bin/sh ${APP_USER}
 
-# Install ca certificates
-RUN apt-get update \
-    && apt-get install curl ca-certificates -y --no-install-recommends \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+# Install build dependencies
+RUN apk add --no-cache \
+    build-base \
+    python3-dev \
+    libffi-dev \
+    openssl-dev \
+    postgresql-dev \
+    musl-dev \
+    cargo \
+    curl \
+    ca-certificates \
+    gcc
+
+# Upgrade pip
+RUN python -m pip install --upgrade pip setuptools wheel
+
+ENV POETRY_VERSION=2.1.3
 
 # install Poetry
 RUN curl -sSL https://install.python-poetry.org | python3 -
-ENV PATH /root/.local/bin:$PATH
 
-# Upgrade pip
-RUN pip install --upgrade pip
-
+# Add Poetry to PATH
+ENV PATH="/root/.local/bin:$PATH"
 
 COPY ./poetry.lock $MICRO_SERVICE
 COPY ./pyproject.toml $MICRO_SERVICE
 
-
 # install dependencies
 RUN poetry config virtualenvs.create false
 
-RUN poetry install --no-dev
+RUN poetry install
 
 
 RUN chown -R ${APP_USER}:${APP_USER} /root
@@ -58,5 +67,4 @@ RUN chmod -R a+rwx $MICRO_SERVICE
 # Set the default user
 USER ${APP_USER}
 
-
-CMD ["/bin/bash", "-c", "/portfolio-app/docker/start_api.sh"]
+CMD ["/bin/sh", "-c", "/portfolio-app/docker/start_api.sh"]

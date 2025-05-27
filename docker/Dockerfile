@@ -1,4 +1,4 @@
-FROM python:3.10-alpine
+FROM python:3.10-slim
 
 ENV MICRO_SERVICE=/portfolio-app
 # set work directory
@@ -19,34 +19,25 @@ ARG GROUP_ID=1000
 ARG APP_USER=appuser
 
 # Create user and group
-RUN addgroup -g ${GROUP_ID} ${APP_USER} && adduser -D -u ${USER_ID} -G ${APP_USER} -s /bin/sh ${APP_USER}
+RUN groupadd -g ${GROUP_ID} ${APP_USER} && useradd -u ${USER_ID} -g ${APP_USER} -s /bin/sh ${APP_USER}
 
-# Install build dependencies
-RUN apk add --no-cache \
-    build-base \
-    python3-dev \
-    libffi-dev \
-    openssl-dev \
-    postgresql-dev \
-    musl-dev \
-    cargo \
-    curl \
-    ca-certificates \
-    gcc
-
-# Upgrade pip
-RUN python -m pip install --upgrade pip setuptools wheel
-
-ENV POETRY_VERSION=2.1.3
+# Install ca certificates
+RUN apt-get update \
+    && apt-get install curl ca-certificates -y --no-install-recommends libpq-dev \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # install Poetry
 RUN curl -sSL https://install.python-poetry.org | python3 -
-
-# Add Poetry to PATH
 ENV PATH="/root/.local/bin:$PATH"
+
+# Upgrade pip
+RUN pip install --upgrade pip setuptools wheel virtualenv
+
 
 COPY ./poetry.lock $MICRO_SERVICE
 COPY ./pyproject.toml $MICRO_SERVICE
+
 
 # install dependencies
 RUN poetry config virtualenvs.create false
@@ -67,4 +58,5 @@ RUN chmod -R a+rwx $MICRO_SERVICE
 # Set the default user
 USER ${APP_USER}
 
-CMD ["/bin/sh", "-c", "/portfolio-app/docker/start_api.sh"]
+
+CMD ["/bin/bash", "-c", "/portfolio-app/docker/start_api.sh"]

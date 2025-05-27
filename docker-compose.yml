@@ -84,8 +84,8 @@ services:
     restart: always
 
     environment:
-      - VIRTUAL_HOST=meshack.design
-      - LETSENCRYPT_HOST=meshack.design
+      - VIRTUAL_HOST=meshack.tech
+      - LETSENCRYPT_HOST=meshack.tech
       - VIRTUAL_PORT=81
   nginx-proxy:
     image: nginxproxy/nginx-proxy

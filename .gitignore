@@ -145,3 +145,5 @@ portfolio-db/
 *.pem
 cloud-sql/
 ELK/
+
+backups/

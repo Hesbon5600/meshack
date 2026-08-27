@@ -23,13 +23,31 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv("SECRET_KEY")
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DEBUG", False)
 
-ALLOWED_HOSTS = [os.getenv("ALLOWED_HOSTS", "*"), "meshack.tech"]
+def env_bool(name, default=False):
+    return os.getenv(name, str(int(default))).strip().lower() in {
+        "1",
+        "true",
+        "yes",
+        "on",
+    }
+
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = env_bool("DEBUG")
+
+configured_hosts = os.getenv("ALLOWED_HOSTS") or os.getenv("ALLOWED_HOST") or "meshack.tech"
+ALLOWED_HOSTS = list(dict.fromkeys(
+    [host.strip() for host in configured_hosts.split(",") if host.strip()]
+    + ["meshack.tech"]
+))
 
 ALLOWED_ORIGINS = ["http://meshack.tech", "https://meshack.tech"]
 CSRF_TRUSTED_ORIGINS = ALLOWED_ORIGINS.copy()
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+SECURE_SSL_REDIRECT = env_bool("SECURE_SSL_REDIRECT", not DEBUG)
+SESSION_COOKIE_SECURE = env_bool("SESSION_COOKIE_SECURE", not DEBUG)
+CSRF_COOKIE_SECURE = env_bool("CSRF_COOKIE_SECURE", not DEBUG)
 
 
 # Application definition

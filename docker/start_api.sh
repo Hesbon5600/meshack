@@ -1,17 +1,15 @@
 #!/bin/bash
+set -e
 
 # source /root/.local/share/virtualenvs/portfolio-*/bin/activate
 
 echo "<<<<<<<< Collect Staticfiles>>>>>>>>>"
 python manage.py collectstatic --noinput
 
-
-sleep 14
 echo "<<<<<<<< Database Setup and Migrations Starts >>>>>>>>>"
 # Run database migrations
-python manage.py migrate &
+python manage.py migrate
 
-sleep 5
 echo "<<<<<<< Database Setup and Migrations Complete >>>>>>>>>>"
 echo " "
 
@@ -28,4 +26,4 @@ celery -A app worker -l info --pool=gevent --concurrency=1000 &
 echo "<<<<<<<<<<<<<<<<<<<< START API >>>>>>>>>>>>>>>>>>>>>>>>"
 # python manage.py runserver 0.0.0.0:8000
 # Start the API with gunicorn
-gunicorn --bind 0.0.0.0:8000 app.wsgi --reload --access-logfile '-' --workers=2
+exec gunicorn --bind 0.0.0.0:8000 app.wsgi --reload --access-logfile '-' --workers=2

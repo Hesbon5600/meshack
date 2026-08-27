@@ -1,7 +1,8 @@
+name: portfolio-meshack
+
 services:
   database:
     restart: always
-    container_name: database
     image: postgres:14
     environment:
       - POSTGRES_USER=${DB_USER}
@@ -9,43 +10,45 @@ services:
       - POSTGRES_DB=${DB_NAME}
     volumes:
       - database_volume:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
-    expose:
-      - "5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     networks:
       - back-end
   redis:
     image: redis
-    container_name: redis
-    ports:
-      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     networks:
       - back-end
 
   app:
     restart: always
-    container_name: app
     build:
       context: .
       dockerfile: docker/Dockerfile
     expose:
       - "8000"
-    image: portfolio-app
+    image: portfolio-meshack-app
     volumes:
       - .:/portfolio-app
       - static_volume:/portfolio-app/staticfiles/
     depends_on:
-      - database
-      - redis
+      database:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
     entrypoint:
       [
         "/bin/bash",
         "-c",
         "/portfolio-app/docker/start_api.sh"
       ]
-    stdin_open: true
-    tty: true
     networks:
       - back-end
     environment:
@@ -55,72 +58,51 @@ services:
       - DB_NAME=${DB_NAME}
       - DB_HOST=database
       - SECRET_KEY=${SECRET_KEY}
-      - ALLOWED_HOST=${ALLOWED_HOST}
-      - CELERY_BROKER_URL=redis://redis
-      - CELERY_RESULT_BACKEND=redis://redis
+      - ALLOWED_HOSTS=${ALLOWED_HOSTS:-meshack.tech}
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
       - EMAIL_HOST_USER=${EMAIL_HOST_USER}
       - EMAIL_HOST=${EMAIL_HOST}
       - EMAIL_HOST_PASSWORD=${EMAIL_HOST_PASSWORD}
       - TO_EMAIL=${TO_EMAIL}
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8000/ >/dev/null || exit 1"]
+      interval: 10s
+      timeout: 5s
+      start_period: 30s
+      retries: 5
 
   proxy:
-    image: portfolio-nginx
-    container_name: proxy
+    image: portfolio-meshack-proxy
     build:
       context: .
       dockerfile: nginx/nginx.Dockerfile
-    # ports:
-    #   - "80:81"
     expose:
       - "81"
     networks:
       - back-end
+      - edge
     depends_on:
-      - app
+      app:
+        condition: service_healthy
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
-      - static_volume:/portfolio-app/static/
+      - static_volume:/portfolio-app/staticfiles/:ro
     restart: always
-
-    environment:
-      - VIRTUAL_HOST=meshack.tech
-      - LETSENCRYPT_HOST=meshack.tech
-      - VIRTUAL_PORT=81
-  nginx-proxy:
-    image: nginxproxy/nginx-proxy
-    container_name: nginx-proxy
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - /var/run/docker.sock:/tmp/docker.sock:ro
-      - ./nginx/nginx.conf:/data/nginx/custom/http_top.conf
-      - certs:/etc/nginx/certs
-      - vhost-d:/etc/nginx/vhost.d
-      - html:/usr/share/nginx/html
-    environment:
-      - DEFAULT_EMAIL=hesbonkiptoo5600@gmail.com
-    networks:
-      - back-end
-  acme-companion:
-    image: nginxproxy/acme-companion
-    container_name: nginx-proxy-acme
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - certs:/etc/nginx/certs
-      - vhost-d:/etc/nginx/vhost.d
-      - html:/usr/share/nginx/html
-      - acme:/etc/acme.sh
-    environment:
-      - DEFAULT_EMAIL=hesbonkiptoo5600@gmail.com
-      - NGINX_PROXY_CONTAINER=nginx-proxy
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=edge
+      - traefik.http.routers.portfolio-meshack.rule=Host(`meshack.tech`)
+      - traefik.http.routers.portfolio-meshack.entrypoints=websecure
+      - traefik.http.routers.portfolio-meshack.tls=true
+      - traefik.http.routers.portfolio-meshack.tls.certresolver=letsencrypt
+      - traefik.http.services.portfolio-meshack.loadbalancer.server.port=81
 
 networks:
   back-end:
+  edge:
+    external: true
+    name: edge
 volumes:
-  certs:
-  vhost-d:
-  html:
-  acme:
   static_volume:
   database_volume:

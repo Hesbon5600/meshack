@@ -23,12 +23,14 @@ build:
 start:
 	@echo "<<<<<<<<<<Start up the app in the background after building>>>>>>>>>>>>>>"
 	@echo ""
+	@docker network inspect edge >/dev/null 2>&1 || docker network create edge
 	docker compose up -d
 
 #@-- command to start the application --@#
 start-verbose:
 	@echo "<<<<<<<<<<Start up the app containers after building>>>>>>>>>>>>>>"
 	@echo ""
+	@docker network inspect edge >/dev/null 2>&1 || docker network create edge
 	docker compose up
 
 

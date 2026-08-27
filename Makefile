@@ -17,26 +17,26 @@ help:
 build:
 	@echo "<<<<<<<<<<Build the app containers>>>>>>>>>>>>>>"
 	@echo ""
-	docker-compose build
+	docker compose build
 
 #@-- command to start the container in the background --@#
 start:
 	@echo "<<<<<<<<<<Start up the app in the background after building>>>>>>>>>>>>>>"
 	@echo ""
-	docker-compose up -d
+	docker compose up -d
 
 #@-- command to start the application --@#
 start-verbose:
 	@echo "<<<<<<<<<<Start up the app containers after building>>>>>>>>>>>>>>"
 	@echo ""
-	docker-compose up
+	docker compose up
 
 
 #@-- command to stop the application --@#
 stop:
 	@echo "<<<<<<<<<<Stop running the app containers>>>>>>>>>>>>>>"
 	@echo ""
-	docker-compose down
+	docker compose down
 
 #@-- command to redeploy the application --@#
 redeploy:
@@ -48,7 +48,7 @@ redeploy:
 kill:
 	@echo "<<<<<<<<<<Stop running the app and remove containers>>>>>>>>>>>>>>"
 	@echo ""
-	docker-compose down -v
+	docker compose down -v
 
 #@-- help should be run by default when no command is specified --@#
 default: help

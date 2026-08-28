@@ -40,6 +40,12 @@ stop:
 	@echo ""
 	docker compose down
 
+#@-- command to view the application logs --@#
+stop:
+	@echo "<<<<<<<<<<View the application logs>>>>>>>>>>>>>>"
+	@echo ""
+	docker compose logs --tail 100 -f
+
 #@-- command to redeploy the application --@#
 redeploy:
 	@echo "<<<<<<<<<<Redeploy running the app containers>>>>>>>>>>>>>>"

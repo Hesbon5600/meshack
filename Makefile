@@ -41,7 +41,7 @@ stop:
 	docker compose down
 
 #@-- command to view the application logs --@#
-stop:
+logs:
 	@echo "<<<<<<<<<<View the application logs>>>>>>>>>>>>>>"
 	@echo ""
 	docker compose logs --tail 100 -f
